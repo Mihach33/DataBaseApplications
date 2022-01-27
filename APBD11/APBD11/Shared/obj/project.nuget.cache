@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3BuWhA8VWsjr0yohM8xR6cM8uYxaqPDZvFL/jqzhR0acO4KTeFmvDg5NFBN7CrXr+aNWRAYBdEgpiASWzhhzTQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mihach\\Desktop\\APBD\\rep\\cwiczenia11_zen-s20511\\APBD11\\APBD11\\Shared\\APBD11.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mihach\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

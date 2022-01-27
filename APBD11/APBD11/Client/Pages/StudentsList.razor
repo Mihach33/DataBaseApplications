@@ -1,0 +1,146 @@
+﻿@page "/students"
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavManager
+
+<h3>Students</h3>
+<div height="50"></div>
+@if (Students == null)
+{
+    <img src="https://media0.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif" alt="Loading" />
+}
+else if (Students.Count == 0)
+{
+    <span>There are no students</span>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="border:2px solid #000">Avatar</th>
+                <th style="border:2px solid #000" @onclick="@(()=>Sort(1))">First Name</th>
+                <th style="border:2px solid #000" @onclick="@(()=>Sort(2))">Last Name</th>
+                <th style="border:2px solid #000" @onclick="@(()=>Sort(3))">Birth Date</th>
+                <th style="border:2px solid #000" @onclick="@(()=>Sort(4))">Studies</th>
+                <th style="border:0px solid #fff"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Students)
+            {
+                <tr>
+                    <td style="border:2px solid #000" @onclick="@(()=>SeeStudent(s))">
+                        <img src="@s.Avatar" width="90" height="90" />
+                    </td>
+                    <td style="border:2px solid #000" @onclick="@(()=>SeeStudent(s))">
+                        @s.FirstName
+                    </td>
+                    <td style="border:2px solid #000" @onclick="@(()=>SeeStudent(s))">
+                        @s.LastName
+                    </td>
+                    <td style="border:2px solid #000" @onclick="@(()=>SeeStudent(s))">
+                        @s.BirthDate
+                    </td>
+                    <td style="border:2px solid #000" @onclick="@(()=>SeeStudent(s))">
+                        @s.Studies
+                    </td>
+                    <td style="border:0px solid #fff">
+                        <button class="btn-danger" @onclick="@(()=>DeleteStudents(s))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public List<Student> Students { get; set; }
+
+    public Student student = new Student();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+
+        var httpClient = new HttpClient();
+        var result = await httpClient.GetAsync("https://localhost:44356/api/students");
+        var data = await result.Content.ReadAsStringAsync();
+        Console.WriteLine(data);
+
+        Students = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Student>>(data);
+        Students.Sort((x, y) => x.LastName.CompareTo(y.LastName));
+    }
+
+    private void SeeStudent(Student stud)
+    {
+        student = stud;
+        NavManager.NavigateTo("/editstudent/" + stud.IdStudent); 
+    }
+
+
+    private async Task DeleteStudents(Student student)
+    {
+
+        if (!await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete the student '{student.FirstName} {student.LastName}'?"))
+        {
+            return;
+        }
+
+        Students.Remove(student);
+    }
+
+    private async Task Sort(int sortWay)
+    {
+        switch (sortWay)
+        {
+            case 1:
+                if (Students.SequenceEqual(Students.OrderByDescending(x => x.FirstName)))
+                {
+                    Students.Sort((x, y) => x.FirstName.CompareTo(y.FirstName));
+                }
+                else
+                {
+                    Students.Sort((x, y) => y.FirstName.CompareTo(x.FirstName));
+                }
+
+                break;
+
+            case 2:
+                if (Students.SequenceEqual(Students.OrderByDescending(x => x.LastName)))
+                {
+                    Students.Sort((x, y) => x.LastName.CompareTo(y.LastName));
+                }
+                else
+                {
+                    Students.Sort((x, y) => y.LastName.CompareTo(x.LastName));
+                }
+
+                break;
+
+            case 3:
+                if (Students.SequenceEqual(Students.OrderByDescending(x => x.BirthDate)))
+                {
+                    Students.Sort((x, y) => x.BirthDate.CompareTo(y.BirthDate));
+                }
+                else
+                {
+                    Students.Sort((x, y) => y.BirthDate.CompareTo(x.BirthDate));
+                }
+
+                break;
+
+            case 4:
+                if (Students.SequenceEqual(Students.OrderByDescending(x => x.Studies)))
+                {
+                    Students.Sort((x, y) => x.Studies.CompareTo(y.Studies));
+                }
+                else
+                {
+                    Students.Sort((x, y) => y.Studies.CompareTo(x.Studies));
+                }
+
+                break;
+        }
+    }
+
+}

@@ -1,0 +1,56 @@
+﻿@page "/editstudent/{Id:int}"
+@inject NavigationManager NavManager
+
+<h3 class="mb-4 mt-5">Student's Details</h3>
+<div class="d-flex">
+    <div class="mr-5">
+        <form>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
+                <label for="first-name" class="form-label text-end me-3" style="white-space: nowrap; min-width: 100px">First name:</label>
+                <input type="text" class="form-control" id="first-name" value="@student.FirstName" readonly>
+            </div>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
+                <label for="last-name" class="form-label text-end me-3" style="white-space: nowrap; min-width: 100px">Last name:</label>
+                <input type="text" class="form-control" id="last-name" value="@student.LastName" readonly>
+            </div>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
+                <label for="birth-date" class="form-label text-end me-3" style="white-space: nowrap; min-width: 100px">Birth Date:</label>
+                <input type="text" class="form-control" id="birth-date" value="@student.BirthDate" readonly>
+            </div>
+            <div class="mb-3 d-flex justify-content-end align-items-center">
+                <label for="studies" class="form-label text-end me-3" style="white-space: nowrap; min-width: 100px">Studies:</label>
+                <input type="text" class="form-control" id="studies" value="@student.Studies" readonly>
+            </div>
+        </form>
+        <button class="btn btn-primary mt-3 ms-2" @onclick="@(()=>GoToStudents())">Return</button>
+    </div>
+    <div class="d-flex flex-column">
+        <div class="mb-3 d-flex justify-content-end align-items-center">
+            <label for="avatar" class="form-label text-end me-3" style="white-space: nowrap; min-width: 100px">Avatar:</label>
+            <input type="text" class="form-control" id="avatar" value="@student.Avatar" readonly>
+        </div>
+        <img class="align-self-center" src="@student.Avatar" alt="Avatar" width="100" height="100">
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Student student = new Student();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var httpClient = new HttpClient();
+        var result = await httpClient.GetAsync("https://localhost:44356/api/students/" + Id);
+        var data = await result.Content.ReadAsStringAsync();
+        Console.WriteLine(data);
+
+        student = Newtonsoft.Json.JsonConvert.DeserializeObject<Student>(data);
+    }
+
+    private void GoToStudents()
+    {
+        NavManager.NavigateTo("/students");
+    }
+}

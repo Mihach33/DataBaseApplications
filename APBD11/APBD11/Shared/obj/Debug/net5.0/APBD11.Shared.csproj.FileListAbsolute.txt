@@ -1,0 +1,12 @@
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\bin\Debug\net5.0\APBD11.Shared.deps.json
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\bin\Debug\net5.0\APBD11.Shared.dll
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\bin\Debug\net5.0\ref\APBD11.Shared.dll
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\bin\Debug\net5.0\APBD11.Shared.pdb
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.csprojAssemblyReference.cache
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.AssemblyInfoInputs.cache
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.AssemblyInfo.cs
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.dll
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\ref\APBD11.Shared.dll
+C:\Users\Mihach\Desktop\APBD11\APBD11\Shared\obj\Debug\net5.0\APBD11.Shared.pdb
